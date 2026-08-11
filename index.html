@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="Zh-hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chorme">
+    <title>批量赠送勋章</title>
+    <style>
+        body {
+            background-image: url(img/233421u4rklr7fk7a4o5f7.jpg) !important;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            width: 640px;
+            margin: 0 auto;
+            font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+        }
+
+        #ct {
+            background: rgba(232, 228, 225, 0.3);
+            transition: all 0.5s;
+            border-radius: 10px;
+            margin: 12px;
+            padding: 18px;
+        }
+
+        #ct:hover {
+            backdrop-filter: blur(6px);
+            background: rgba(232, 228, 225, 0.7);
+        }
+
+        #ct * {
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+
+        #ct:hover * {
+            opacity: 1;
+        }
+
+        .top_container {
+            margin-bottom: 16px;
+        }
+
+        .top_container .subtitle {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 0px;
+            margin-bottom: 4px;
+        }
+
+        input[type="text"] {
+            height: 30px;
+            border-radius: 6px;
+            border: none;
+            padding: 0 10px;
+            font-size: 16px;
+            width: 200px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .container .subtitle {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 0px;
+            margin-bottom: 8px;
+        }
+
+        .gift-only {
+            width: 55%;
+        }
+
+        .right_part {
+            width: 45%;
+        }
+
+        .options {
+            display: flex;
+            align-items: center;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+
+        .options img {
+            border-radius: 4px;
+            height: 34px;
+            width: 34px;
+            flex-shrink: 0;
+        }
+
+        .options input[type="checkbox"] {
+            transform: scale(1.6);
+            margin: 0 6px 0 8px;
+            flex-shrink: 0;
+        }
+
+        .options .medal-label {
+            font-size: 14px;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        /* ----- 快速选择区域 ----- */
+        .quick_select {
+            margin-top: 14px;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: background 0.3s;
+        }
+
+        .quick_select:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .quick_select .qs_title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .quick_select .qs_title small {
+            font-weight: normal;
+            font-size: 13px;
+            color: #555;
+            margin-left: 4px;
+        }
+
+        .qs_btn_group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .quick_btn {
+            background: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            padding: 6px 18px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .quick_btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .quick_btn:active {
+            transform: translateY(0px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick_btn.btn-full {
+            background: #e3f0ff;
+            color: #1a5a9c;
+        }
+        .quick_btn.btn-full:hover {
+            background: #c5dfff;
+        }
+
+        .quick_btn.btn-corrupt {
+            background: #ffe3e3;
+            color: #b13b3b;
+        }
+        .quick_btn.btn-corrupt:hover {
+            background: #ffd0d0;
+        }
+
+        .quick_btn.btn-purify {
+            background: #e6f7e6;
+            color: #2a7a2a;
+        }
+        .quick_btn.btn-purify:hover {
+            background: #c8f0c8;
+        }
+
+        .quick_btn.btn-clear {
+            background: #f0f0f0;
+            color: #555;
+        }
+        .quick_btn.btn-clear:hover {
+            background: #e0e0e0;
+        }
+
+        .qs_note {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 16px;
+        }
+
+        .qs_note .note-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .qs_note .note-item .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 2px;
+        }
+        .dot-full {
+            background: #1a5a9c;
+        }
+        .dot-corrupt {
+            background: #b13b3b;
+        }
+        .dot-purify {
+            background: #2a7a2a;
+        }
+        .dot-clear {
+            background: #888;
+        }
+
+        /* ----- functions ----- */
+        #functions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button#send_btn {
+            background-color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            padding: 10px 28px;
+            border: none;
+            margin: 16px 0 8px 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        button#send_btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        #total_cost {
+            display: flex;
+            justify-content: center;
+            margin-top: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 6px 18px;
+            border-radius: 8px;
+        }
+
+        .footnote {
+            font-size: 13px;
+            color: #444;
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            line-height: 1.6;
+        }
+
+        .footnote strong {
+            color: #a33;
+        }
+
+        p {
+            margin-bottom: 0px;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 680px) {
+            body {
+                width: 100%;
+            }
+            #ct {
+                margin: 6px;
+                padding: 12px;
+            }
+            .container {
+                flex-direction: column;
+            }
+            .gift-only,
+            .right_part {
+                width: 100%;
+            }
+            .right_part {
+                margin-top: 16px;
+            }
+            .qs_btn_group {
+                gap: 6px;
+            }
+            .quick_btn {
+                font-size: 14px;
+                padding: 5px 14px;
+            }
+            .qs_note {
+                font-size: 12px;
+            }
+            input[type="text"] {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ct">
+        <!-- ===== 顶部：UID ===== -->
+        <div class="top_container">
+            <div class="uid_input">
+                <p class="subtitle">对方的用户ID: </p>
+                <input type="text" id="zs_uid" value="" placeholder="请输入对方UID" />
+            </div>
+
+            <!-- ===== 快速选择区域 ===== -->
+            <div class="quick_select">
+                <div class="qs_title">
+                    ⚡ 快速选择
+                    <small>（仅勾选，不会赠送）</small>
+                </div>
+                <div class="qs_btn_group">
+                    <button type="button" class="quick_btn btn-full" onclick="selectFullSet()">📦 全套</button>
+                    <button type="button" class="quick_btn btn-corrupt" onclick="selectCorruptedSet()">😈 堕落套</button>
+                    <button type="button" class="quick_btn btn-purify" onclick="selectPurifySet()">🌿 净化套</button>
+                    <button type="button" class="quick_btn btn-clear" onclick="clearSelection()">🗑️ 清空</button>
+                </div>
+                <div class="qs_note">
+                    <span class="note-item"><span class="dot dot-full"></span> 全套：不含糖果盒、遗忘水、杀意人偶</span>
+                    <span class="note-item"><span class="dot dot-corrupt"></span> 堕落套：咆哮 + 肥皂 + 变骚 + 千杯</span>
+                    <span class="note-item"><span class="dot dot-purify"></span> 净化套：茉香啤酒</span>
+                    <span class="note-item"><span class="dot dot-clear"></span> 清空：取消所有勾选</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 主体：勋章列表 ===== -->
+        <div class="container">
+            <!-- 左列：仅赠送 -->
+            <div class="gift-only">
+                <p class="subtitle">仅赠送</p>
+
+                <div class="options"><img src="img/141900suhhfqzptfzvlfak.gif" alt="咸鱼" />
+                    <input type="checkbox" name='Checkbox[]' value='195' gold="01" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币01] [1日] 没有梦想的咸鱼</span>
+                </div>
+
+                <div class="options"><img src="img/113409q011xcf550bav1a5.gif" alt="补脑剂" />
+                    <input type="checkbox" name='Checkbox[]' value='46' gold="22" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币22] [3日] 灵光补脑剂</span>
+                </div>
+
+                <div class="options"><img src="img/220343vhng1hmssoyh577i.gif" alt="啤酒" />
+                    <input type="checkbox" name='Checkbox[]' value='456' gold="25" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币25] [3日] 茉香啤酒</span>
+                </div>
+
+                <div class="options"><img src="img/152120kommozaz99zaoom9.gif" alt="霜淇淋" />
+                    <input type="checkbox" name='Checkbox[]' value='869' gold="25" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币25] [3日] GM夏日霜淇淋</span>
+                </div>
+
+                <div class="options"><img src="img/114500je50kb57xgkx28jx.gif" alt="咆哮" />
+                    <input type="checkbox" name='Checkbox[]' value='100' gold="0" magic="8" onchange="calculate()" />
+                    <span class="medal-label">[咒术08] [3日] 咆哮诅咒</span>
+                </div>
+
+                <div class="options"><img src="img/113346zfvtihpznujw1nii.gif" alt="肥皂" />
+                    <input type="checkbox" name='Checkbox[]' value='20' gold="10" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币10] [5日] 丢肥皂</span>
+                </div>
+
+                <div class="options"><img src="img/113342to7t7zj24jot5s7t.gif" alt="千杯" />
+                    <input type="checkbox" name='Checkbox[]' value='45' gold="12" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币12] [5日] 千杯不醉</span>
+                </div>
+
+                <div class="options"><img src="img/141637dqowosrr6o66wszv.gif" alt="变骚" />
+                    <input type="checkbox" name='Checkbox[]' value='174' gold="13" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币13] [5日] 变骚喷雾</span>
+                </div>
+
+                <div class="options"><img src="img/113350j47rr1f17qq4nafs.gif" alt="情书" />
+                    <input type="checkbox" name='Checkbox[]' value='19' gold="15" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币15] [5日] 送情书</span>
+                </div>
+
+                <div class="options"><img src="img/114543q711gvjj1gb7181b.gif" alt="霍格沃茨" />
+                    <input type="checkbox" name='Checkbox[]' value='119' gold="0" magic="8" onchange="calculate()" />
+                    <span class="medal-label">[咒术08] [5日] 霍格沃茨五日游</span>
+                </div>
+
+                <div class="options"><img src="img/020037sbg3ssnsgo1d0pbn.gif" alt="飘飘" />
+                    <input type="checkbox" name='Checkbox[]' value='840' gold="15" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币15] [5日] 飘飘</span>
+                </div>
+
+                <div class="options"><img src="img/113509p6ybf8wy2yf2z7zd.gif" alt="贵宾卡" />
+                    <input type="checkbox" name='Checkbox[]' value='150' gold="50" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币50] [7日] 神秘商店贵宾卡</span>
+                </div>
+
+                <div class="options"><img src="img/220403i7qb9uk0w9w5180w.gif" alt="糖果盒" />
+                    <input type="checkbox" name='Checkbox[]' value='455' gold="70" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币70] [7日] 闪光糖果盒</span>
+                </div>
+
+                <div class="options"><img src="img/020044ajprp7jnph6b6l17.gif" alt="青苹果" />
+                    <input type="checkbox" name='Checkbox[]' value='839' gold="25" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币25] [7日] 青苹果</span>
+                </div>
+
+                <div class="options"><img src="img/113515vyfn72h7yw5ad3t7.gif" alt="蛋糕" />
+                    <input type="checkbox" name='Checkbox[]' value='143' gold="40" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币40] [14日] 萨赫的蛋糕</span>
+                </div>
+
+                <div class="options"><img src="img/113358ltdxvdxwc2n1an25.gif" alt="遗忘水" />
+                    <input type="checkbox" name='Checkbox[]' value='104' gold="180" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币180] [30日] 遗忘之水</span>
+                </div>
+            </div>
+
+            <!-- 右列：可自购 -->
+            <div class="right_part">
+                <div class="self-purchase">
+                    <p class="subtitle">可自购</p>
+
+                    <div class="options"><img src="img/114530cthryt8yatcaass1.gif" alt="炼金" />
+                        <input type="checkbox" name='Checkbox[]' value='14' gold="0" magic="4" onchange="calculate()" />
+                        <span class="medal-label">[咒术04] [3日] 炼金之心</span>
+                    </div>
+
+                    <div class="options"><img src="img/215910qzr53805k8vr8cee.gif" alt="石肤" />
+                        <input type="checkbox" name='Checkbox[]' value='186' gold="0" magic="4" onchange="calculate()" />
+                        <span class="medal-label">[咒术04] [3日] 石肤术</span>
+                    </div>
+
+                    <div class="options"><img src="img/114440h1op1p51o3woiip6.gif" alt="召唤" />
+                        <input type="checkbox" name='Checkbox[]' value='44' gold="0" magic="8" onchange="calculate()" />
+                        <span class="medal-label">[咒术08] [4日] 召唤古代战士</span>
+                    </div>
+
+                    <div class="options"><img src="img/114427z0y3lkpzgk46gnp5.gif" alt="水泡" />
+                        <input type="checkbox" name='Checkbox[]' value='43' gold="0" magic="3" onchange="calculate()" />
+                        <span class="medal-label">[咒术03] [5日] 水泡术</span>
+                    </div>
+
+                    <div class="options"><img src="img/233428tmennhulj3nj3e6x.gif" alt="思绪" />
+                        <input type="checkbox" name='Checkbox[]' value='458' gold="0" magic="15" onchange="calculate()" />
+                        <span class="medal-label">[咒术15] [5日] 思绪骤聚</span>
+                    </div>
+
+                    <div class="options"><img src="img/195901i4sbsnnn40qnsc4s.gif" alt="雷霆" />
+                        <input type="checkbox" name='Checkbox[]' value='457' gold="0" magic="7" onchange="calculate()" />
+                        <span class="medal-label">[咒术07] [7日] 雷霆晶球</span>
+                    </div>
+
+                    <div class="options"><img src="img/210416cnqgzpupdqqqpsq6.gif" alt="杀意" />
+                        <input type="checkbox" name='Checkbox[]' value='600' gold="0" magic="8" onchange="calculate()" />
+                        <span class="medal-label">[咒术08] [7日] 杀意人偶</span>
+                    </div>
+                </div>
+
+                <!-- ===== 底部：总消耗 + 赠送按钮 ===== -->
+                <div id="functions">
+                    <div id="total_cost">总消耗：金币 = 0 咒术 = 0</div>
+                    <button type="button" id="send_btn" onclick="send()">
+                        🎁 点击赠送
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 底部提示 ===== -->
+        <div class="footnote">
+            <strong>⚠️ 请注意：</strong>在点击赠送后，如果只出现了你勾选的第一个勋章，说明其他窗口可能被你的浏览器拦截了，
+            返回这个页面，在浏览器地址栏的右边，取消对弹出窗口的拦截哦~
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <script type="text/javascript">
+        // ----- 计算总消耗 -----
+        function calculate() {
+            var str = document.getElementsByName("Checkbox[]");
+            var totalGold = 0;
+            var totalMagic = 0;
+            for (var z = 0; z < str.length; z++) {
+                if (str[z].checked == true) {
+                    totalGold += parseInt(str[z].getAttribute("gold")) || 0;
+                    totalMagic += parseInt(str[z].getAttribute("magic")) || 0;
+                }
+            }
+            document.getElementById("total_cost").innerHTML = "总消耗：金币 = " + totalGold + " 咒术 = " + totalMagic;
+        }
+
+        // ----- 发送（原逻辑不变） -----
+        function send() {
+            var url = "https://www.gamemale.com/plugin.php?id=wodexunzhang:showxunzhang&action=zengsongAction&medalid=";
+            var uid = document.getElementById("zs_uid").value;
+            if (!uid || uid.trim() === "") {
+                alert("请先输入对方的用户ID！");
+                return;
+            }
+            var str = document.getElementsByName("Checkbox[]");
+            var delay = 0;
+            var interval = 500;
+
+            for (var z = 0; z < str.length; z++) {
+                if (str[z].checked) {
+                    (function(medalId, uid) {
+                        setTimeout(function() {
+                            var sum = url + medalId + "&zs_uid=" + uid + "&checkUID=" + uid;
+                            window.open(sum);
+                        }, delay);
+                    })(str[z].value, uid);
+                    delay += interval;
+                }
+            }
+            if (delay === 0) {
+                alert("请至少勾选一个勋章！");
+            }
+        }
+
+        // ===== 快速选择函数 =====
+
+        // 1. 全套（不含糖果盒 455、遗忘水 104、杀意人偶 600）
+        function selectFullSet() {
+            var checkboxes = document.getElementsByName("Checkbox[]");
+            var exclude = ['455', '104', '600'];
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = true;
+                if (exclude.indexOf(checkboxes[i].value) !== -1) {
+                    checkboxes[i].checked = false;
+                }
+            }
+            calculate();
+        }
+
+        // 2. 堕落套（咆哮 100 + 肥皂 20 + 变骚 174 + 千杯 45）
+        function selectCorruptedSet() {
+            var checkboxes = document.getElementsByName("Checkbox[]");
+            var select = ['100', '20', '174', '45'];
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+                if (select.indexOf(checkboxes[i].value) !== -1) {
+                    checkboxes[i].checked = true;
+                }
+            }
+            calculate();
+        }
+
+        // 3. 净化套（仅茉香啤酒 456）
+        function selectPurifySet() {
+            var checkboxes = document.getElementsByName("Checkbox[]");
+            var select = ['456'];
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+                if (select.indexOf(checkboxes[i].value) !== -1) {
+                    checkboxes[i].checked = true;
+                }
+            }
+            calculate();
+        }
+
+        // 4. 清空选择
+        function clearSelection() {
+            var checkboxes = document.getElementsByName("Checkbox[]");
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+            }
+            calculate();
+        }
+
+        // ----- 初始化 -----
+        calculate();
+
+        // 从 URL 获取 uid 并填充
+        function getQueryParam(param) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        var uid = getQueryParam('uid');
+        if (uid) {
+            document.getElementById('zs_uid').value = uid;
+        }
+
+        // 按 Enter 键快速触发赠送
+        document.getElementById('zs_uid').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                send();
+            }
+        });
+    </script>
+</body>
+
+</html>
