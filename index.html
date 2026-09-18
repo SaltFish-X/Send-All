@@ -84,6 +84,7 @@
             align-items: center;
             margin-top: 4px;
             flex-wrap: wrap;
+            cursor: pointer;
         }
 
         .options img {
@@ -137,8 +138,9 @@
 
         .qs_btn_group {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 8px;
             align-items: center;
         }
 
@@ -146,8 +148,8 @@
             background: white;
             font-size: 16px;
             font-weight: bold;
-            border-radius: 8px;
-            padding: 6px 18px;
+            border-radius: 9px;
+            padding: 8px 16px;
             border: none;
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
@@ -155,6 +157,8 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .quick_btn:hover {
@@ -191,12 +195,127 @@
             background: #c8f0c8;
         }
 
+        .quick_btn.btn-custom {
+            background: #fff3d6;
+            color: #a66a00;
+        }
+        .quick_btn.btn-custom:hover {
+            background: #ffe8b3;
+        }
+
         .quick_btn.btn-clear {
             background: #f0f0f0;
             color: #555;
         }
         .quick_btn.btn-clear:hover {
             background: #e0e0e0;
+        }
+
+        /* ----- 自定义预设按钮行 ----- */
+        .preset_row {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 14px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(0, 0, 0, 0.1);
+        }
+        .preset_row.show {
+            display: flex;
+        }
+
+        .preset_btn {
+            position: relative;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            background: #fff3d6;
+            color: #a66a00;
+            border: none;
+            border-radius: 9px;
+            padding: 8px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s;
+            max-width: 220px;
+        }
+        .preset_btn:hover {
+            background: #ffe8b3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .preset_btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .preset_btn .preset_name {
+            font-size: 15px;
+            line-height: 1.2;
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .preset_btn .preset_note {
+            font-size: 11px;
+            font-weight: normal;
+            color: #b98a2e;
+            line-height: 1.2;
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .preset_del {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            color: #fff;
+            font-size: 12px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            user-select: none;
+        }
+        .preset_del:hover {
+            background: #ff3838;
+        }
+
+        .preset_edit {
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #5b9bd5;
+            color: #fff;
+            font-size: 10px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            user-select: none;
+        }
+        .preset_edit:hover {
+            background: #3d82c0;
         }
 
         .qs_note {
@@ -232,6 +351,9 @@
         }
         .dot-purify {
             background: #2a7a2a;
+        }
+        .dot-custom {
+            background: #a66a00;
         }
         .dot-clear {
             background: #888;
@@ -291,6 +413,164 @@
             margin-bottom: 0px;
         }
 
+        /* ----- 自定义面板 ----- */
+        .custom_panel {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+        .custom_panel.show {
+            display: flex;
+        }
+        .custom_panel_inner {
+            background: #fff;
+            border-radius: 12px;
+            width: 640px;
+            max-width: 100%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+        .custom_panel_header {
+            padding: 12px 16px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .custom_panel_close {
+            cursor: pointer;
+            font-size: 18px;
+            color: #888;
+            padding: 0 6px;
+            line-height: 1;
+        }
+        .custom_panel_close:hover { color: #333; }
+
+        .custom_panel_toolbar {
+            padding: 8px 16px;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px dashed #eee;
+        }
+        .custom_panel_toolbar button {
+            font-size: 13px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background: #f7f7f7;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .custom_panel_toolbar button:hover { background: #eee; }
+
+        /* 面板主体：与主界面相同的两栏结构 */
+        .custom_panel_list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 16px;
+        }
+        .custom_panel_list .container {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .custom_panel_list .gift-only {
+            width: 55%;
+        }
+        .custom_panel_list .right_part {
+            width: 45%;
+        }
+        .custom_panel_list .subtitle {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+        }
+        /* 面板内条目字号略小，避免右侧过窄换行 */
+        .custom_panel_list .options .medal-label {
+            font-size: 12px;
+        }
+        .custom_panel_list .options img {
+            height: 26px;
+            width: 26px;
+        }
+        .custom_panel_list .options input[type="checkbox"] {
+            transform: scale(1.3);
+            margin: 0 4px 0 6px;
+        }
+
+        /* 名称 / 备注 输入区 */
+        .custom_panel_meta {
+            padding: 10px 16px;
+            border-top: 1px dashed #eee;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: #fcfcfc;
+        }
+        .custom_panel .custom_meta_row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .custom_panel .custom_meta_row label {
+            font-size: 13px;
+            color: #666;
+            width: 62px;
+            flex-shrink: 0;
+            text-align: right;
+        }
+        .custom_panel .custom_meta_row input[type="text"] {
+            flex: 1;
+            width: auto;
+            min-width: 0;
+            height: 30px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 0 10px;
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .custom_panel .custom_meta_row input[type="text"]:focus {
+            border-color: #ffb84d;
+            box-shadow: 0 0 0 2px rgba(255, 184, 77, 0.2);
+        }
+
+        .custom_panel_footer {
+            padding: 10px 16px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #555;
+        }
+        .custom_confirm {
+            background: #ffb84d;
+            color: #fff;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .custom_confirm:hover { background: #ffa733; }
+
         /* 响应式微调 */
         @media (max-width: 680px) {
             body {
@@ -311,11 +591,12 @@
                 margin-top: 16px;
             }
             .qs_btn_group {
+                flex-wrap: wrap;
                 gap: 6px;
             }
             .quick_btn {
-                font-size: 14px;
-                padding: 5px 14px;
+                font-size: 13px;
+                padding: 5px 10px;
             }
             .qs_note {
                 font-size: 12px;
@@ -323,6 +604,13 @@
             input[type="text"] {
                 width: 100%;
                 box-sizing: border-box;
+            }
+            .custom_panel_list .container {
+                flex-direction: column;
+            }
+            .custom_panel_list .gift-only,
+            .custom_panel_list .right_part {
+                width: 100%;
             }
         }
     </style>
@@ -347,12 +635,18 @@
                     <button type="button" class="quick_btn btn-full" onclick="selectFullSet()">📦 全套</button>
                     <button type="button" class="quick_btn btn-corrupt" onclick="selectCorruptedSet()">😈 堕落套</button>
                     <button type="button" class="quick_btn btn-purify" onclick="selectPurifySet()">🌿 净化套</button>
+                    <button type="button" class="quick_btn btn-custom" onclick="openCustomPanel()">⭐ 自定义</button>
                     <button type="button" class="quick_btn btn-clear" onclick="clearSelection()">🗑️ 清空</button>
                 </div>
+
+                <!-- 自定义预设按钮行（初始隐藏） -->
+                <div class="preset_row" id="preset_row"></div>
+
                 <div class="qs_note">
                     <span class="note-item"><span class="dot dot-full"></span> 全套：不含糖果盒、遗忘水、杀意人偶</span>
                     <span class="note-item"><span class="dot dot-corrupt"></span> 堕落套：咆哮 + 肥皂 + 变骚 + 千杯</span>
                     <span class="note-item"><span class="dot dot-purify"></span> 净化套：茉香啤酒</span>
+                    <span class="note-item"><span class="dot dot-custom"></span> 自定义：可命名 + 备注，保存在本地浏览器</span>
                     <span class="note-item"><span class="dot dot-clear"></span> 清空：取消所有勾选</span>
                 </div>
             </div>
@@ -377,11 +671,6 @@
                 <div class="options"><img src="img/220343vhng1hmssoyh577i.gif" alt="啤酒" />
                     <input type="checkbox" name='Checkbox[]' value='456' gold="25" magic="0" onchange="calculate()" />
                     <span class="medal-label">[金币25] [3日] 茉香啤酒</span>
-                </div>
-
-                <div class="options"><img src="img/152120kommozaz99zaoom9.gif" alt="霜淇淋" />
-                    <input type="checkbox" name='Checkbox[]' value='869' gold="25" magic="0" onchange="calculate()" />
-                    <span class="medal-label">[金币25] [3日] GM夏日霜淇淋</span>
                 </div>
 
                 <div class="options"><img src="img/114500je50kb57xgkx28jx.gif" alt="咆哮" />
@@ -432,6 +721,11 @@
                 <div class="options"><img src="img/020044ajprp7jnph6b6l17.gif" alt="青苹果" />
                     <input type="checkbox" name='Checkbox[]' value='839' gold="25" magic="0" onchange="calculate()" />
                     <span class="medal-label">[金币25] [7日] 青苹果</span>
+                </div>
+
+                <div class="options"><img src="img/152120kommozaz99zaoom9.gif" alt="霜淇淋" />
+                    <input type="checkbox" name='Checkbox[]' value='869' gold="25" magic="0" onchange="calculate()" />
+                    <span class="medal-label">[金币25] [10日] GM夏日霜淇淋</span>
                 </div>
 
                 <div class="options"><img src="img/113515vyfn72h7yw5ad3t7.gif" alt="蛋糕" />
@@ -503,6 +797,41 @@
         </div>
     </div>
 
+    <!-- ===== 自定义套装面板 ===== -->
+    <div id="custom_panel" class="custom_panel">
+        <div class="custom_panel_inner">
+            <div class="custom_panel_header">
+                <span id="custom_panel_title">⭐ 新建自定义套装</span>
+                <span class="custom_panel_close" onclick="closeCustomPanel()">✕</span>
+            </div>
+
+            <div class="custom_panel_toolbar">
+                <button type="button" onclick="customSelectAll()">全选</button>
+                <button type="button" onclick="customClearAll()">清空</button>
+            </div>
+
+            <!-- 面板主体：按“仅赠送 / 可自购”分组，结构与主界面一致 -->
+            <div class="custom_panel_list" id="custom_panel_list"></div>
+
+            <!-- 名称 + 备注 -->
+            <div class="custom_panel_meta">
+                <div class="custom_meta_row">
+                    <label for="custom_name">套装名称</label>
+                    <input type="text" id="custom_name" maxlength="16" placeholder="例如：日常全套 / 送新人的">
+                </div>
+                <div class="custom_meta_row">
+                    <label for="custom_note">备注说明</label>
+                    <input type="text" id="custom_note" maxlength="40" placeholder="选填，例如：不含糖果盒，省点金币">
+                </div>
+            </div>
+
+            <div class="custom_panel_footer">
+                <span id="custom_panel_count">已选 0 项</span>
+                <button type="button" class="custom_confirm" id="custom_confirm_btn" onclick="applyCustomPanel()">✔ 保存为新预设</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ============================================================ -->
     <script type="text/javascript">
         // ----- 计算总消耗 -----
@@ -519,7 +848,7 @@
             document.getElementById("total_cost").innerHTML = "总消耗：金币 = " + totalGold + " 咒术 = " + totalMagic;
         }
 
-        // ----- 发送（原逻辑不变） -----
+        // ----- 发送 -----
         function send() {
             var url = "https://www.gamemale.com/plugin.php?id=wodexunzhang:showxunzhang&action=zengsongAction&medalid=";
             var uid = document.getElementById("zs_uid").value;
@@ -548,8 +877,6 @@
         }
 
         // ===== 快速选择函数 =====
-
-        // 1. 全套（不含糖果盒 455、遗忘水 104、杀意人偶 600）
         function selectFullSet() {
             var checkboxes = document.getElementsByName("Checkbox[]");
             var exclude = ['455', '104', '600'];
@@ -562,7 +889,6 @@
             calculate();
         }
 
-        // 2. 堕落套（咆哮 100 + 肥皂 20 + 变骚 174 + 千杯 45）
         function selectCorruptedSet() {
             var checkboxes = document.getElementsByName("Checkbox[]");
             var select = ['100', '20', '174', '45'];
@@ -575,7 +901,6 @@
             calculate();
         }
 
-        // 3. 净化套（仅茉香啤酒 456）
         function selectPurifySet() {
             var checkboxes = document.getElementsByName("Checkbox[]");
             var select = ['456'];
@@ -588,7 +913,6 @@
             calculate();
         }
 
-        // 4. 清空选择
         function clearSelection() {
             var checkboxes = document.getElementsByName("Checkbox[]");
             for (var i = 0; i < checkboxes.length; i++) {
@@ -597,10 +921,340 @@
             calculate();
         }
 
+        // ===== 自定义预设 =====
+        // 存储结构：[ { name, note, medals: ["100","20"] }, ... ]
+        var PRESET_KEY = 'discuz_custom_presets_v2';
+        var editingIndex = -1;
+
+        function loadPresets() {
+            try {
+                var raw = JSON.parse(localStorage.getItem(PRESET_KEY) || '[]');
+                if (!Array.isArray(raw)) return [];
+                return raw.filter(function(p) {
+                    return p && Array.isArray(p.medals);
+                }).map(function(p) {
+                    return {
+                        name: String(p.name || ''),
+                        note: String(p.note || ''),
+                        medals: p.medals.map(String)
+                    };
+                });
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function savePresets(presets) {
+            try {
+                localStorage.setItem(PRESET_KEY, JSON.stringify(presets));
+            } catch (e) {}
+        }
+
+        // 渲染预设按钮行
+        function renderPresets() {
+            var row = document.getElementById('preset_row');
+            var presets = loadPresets();
+            row.innerHTML = '';
+
+            if (presets.length === 0) {
+                row.classList.remove('show');
+                return;
+            }
+            row.classList.add('show');
+
+            presets.forEach(function(preset, idx) {
+                var displayName = preset.name || ('自定义' + (idx + 1));
+
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'preset_btn';
+                btn.title = displayName +
+                    (preset.note ? '\n备注：' + preset.note : '') +
+                    '\n共 ' + preset.medals.length + ' 个勋章（点击应用）';
+
+                var nameEl = document.createElement('span');
+                nameEl.className = 'preset_name';
+                nameEl.textContent = displayName;
+                btn.appendChild(nameEl);
+
+                if (preset.note) {
+                    var noteEl = document.createElement('span');
+                    noteEl.className = 'preset_note';
+                    noteEl.textContent = preset.note;
+                    btn.appendChild(noteEl);
+                }
+
+                btn.onclick = (function(i) {
+                    return function() { applyPreset(i); };
+                })(idx);
+
+                var edit = document.createElement('span');
+                edit.className = 'preset_edit';
+                edit.textContent = '✎';
+                edit.title = '编辑此预设（名称 / 备注 / 内容）';
+                edit.onclick = (function(i) {
+                    return function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        openCustomPanel(i);
+                    };
+                })(idx);
+                btn.appendChild(edit);
+
+                var del = document.createElement('span');
+                del.className = 'preset_del';
+                del.textContent = '×';
+                del.title = '删除此预设';
+                del.onclick = (function(i) {
+                    return function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        deletePreset(i);
+                    };
+                })(idx);
+                btn.appendChild(del);
+
+                row.appendChild(btn);
+            });
+        }
+
+        function applyPreset(idx) {
+            var presets = loadPresets();
+            var preset = presets[idx];
+            if (!preset) return;
+            var selected = preset.medals || [];
+            var checkboxes = document.getElementsByName("Checkbox[]");
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = selected.indexOf(checkboxes[i].value) !== -1;
+            }
+            calculate();
+        }
+
+        function deletePreset(idx) {
+            var presets = loadPresets();
+            var preset = presets[idx];
+            if (!preset) return;
+            var name = preset.name || ('自定义' + (idx + 1));
+            if (!confirm('确定要删除「' + name + '」吗？')) return;
+            presets.splice(idx, 1);
+            savePresets(presets);
+            renderPresets();
+        }
+
+        // ===== 自定义面板 =====
+        // 与主界面完全一致的结构：仅赠送 / 可自购 两栏
+        function openCustomPanel(editIdx) {
+            editingIndex = (typeof editIdx === 'number' && editIdx >= 0) ? editIdx : -1;
+
+            var presets = loadPresets();
+            var editing = (editingIndex >= 0) ? presets[editingIndex] : null;
+
+            document.getElementById('custom_panel_title').textContent =
+                editing ? '✎ 编辑自定义套装' : '⭐ 新建自定义套装';
+            document.getElementById('custom_confirm_btn').textContent =
+                editing ? '✔ 保存修改' : '✔ 保存为新预设';
+
+            document.getElementById('custom_name').value = editing ? (editing.name || '') : '';
+            document.getElementById('custom_note').value = editing ? (editing.note || '') : '';
+
+            // 清除旧内容
+            var list = document.getElementById('custom_panel_list');
+            list.innerHTML = '';
+
+            // 在面板内部，用与主界面相同的 .container / .gift-only / .right_part / .options
+            var panelContainer = document.createElement('div');
+            panelContainer.className = 'container';
+
+            var leftCol = document.createElement('div');
+            leftCol.className = 'gift-only';
+            var leftTitle = document.createElement('p');
+            leftTitle.className = 'subtitle';
+            leftTitle.textContent = '仅赠送';
+            leftCol.appendChild(leftTitle);
+
+            var rightCol = document.createElement('div');
+            rightCol.className = 'right_part';
+            var rightInner = document.createElement('div');
+            rightInner.className = 'self-purchase';
+            var rightTitle = document.createElement('p');
+            rightTitle.className = 'subtitle';
+            rightTitle.textContent = '可自购';
+            rightInner.appendChild(rightTitle);
+            rightCol.appendChild(rightInner);
+
+            // 获取主界面的两个分组，按原顺序复制条目
+            var giftOnlySource = document.querySelector('#ct .gift-only');
+            var selfPurchaseSource = document.querySelector('#ct .self-purchase');
+
+            function buildPanelItem(masterCheckbox, isChecked) {
+                var masterWrap = masterCheckbox.parentNode;
+                var masterImg = masterWrap.querySelector('img');
+                var masterLabel = masterWrap.querySelector('.medal-label');
+
+                var item = document.createElement('label');
+                item.className = 'options';
+
+                var newImg = document.createElement('img');
+                newImg.src = masterImg ? masterImg.src : '';
+                newImg.alt = masterImg ? (masterImg.alt || '') : '';
+                item.appendChild(newImg);
+
+                var newCb = document.createElement('input');
+                newCb.type = 'checkbox';
+                newCb.value = masterCheckbox.value;
+                newCb.checked = !!isChecked;
+                newCb.addEventListener('change', updateCustomCount);
+                item.appendChild(newCb);
+
+                var newLabel = document.createElement('span');
+                newLabel.className = 'medal-label';
+                newLabel.textContent = masterLabel ? masterLabel.textContent.trim() : ('勋章 ' + masterCheckbox.value);
+                item.appendChild(newLabel);
+
+                return item;
+            }
+
+            // 左栏：仅赠送
+            var leftCbs = giftOnlySource.querySelectorAll('input[name="Checkbox[]"]');
+            for (var i = 0; i < leftCbs.length; i++) {
+                var cb = leftCbs[i];
+                var isChecked = editing ? (editing.medals.indexOf(cb.value) !== -1) : false;
+                leftCol.appendChild(buildPanelItem(cb, isChecked));
+            }
+
+            // 右栏：可自购
+            var rightCbs = selfPurchaseSource.querySelectorAll('input[name="Checkbox[]"]');
+            for (var j = 0; j < rightCbs.length; j++) {
+                var rcb = rightCbs[j];
+                var rChecked = editing ? (editing.medals.indexOf(rcb.value) !== -1) : false;
+                rightInner.appendChild(buildPanelItem(rcb, rChecked));
+            }
+
+            panelContainer.appendChild(leftCol);
+            panelContainer.appendChild(rightCol);
+            list.appendChild(panelContainer);
+
+            updateCustomCount();
+            document.getElementById('custom_panel').classList.add('show');
+
+            setTimeout(function() {
+                document.getElementById('custom_name').focus();
+            }, 50);
+        }
+
+        function closeCustomPanel() {
+            document.getElementById('custom_panel').classList.remove('show');
+            editingIndex = -1;
+        }
+
+        function updateCustomCount() {
+            var inputs = document.querySelectorAll('#custom_panel_list input[type="checkbox"]');
+            var n = 0;
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].checked) n++;
+            }
+            document.getElementById('custom_panel_count').textContent = '已选 ' + n + ' 项';
+        }
+
+        function customSelectAll() {
+            var inputs = document.querySelectorAll('#custom_panel_list input[type="checkbox"]');
+            for (var i = 0; i < inputs.length; i++) inputs[i].checked = true;
+            updateCustomCount();
+        }
+
+        function customClearAll() {
+            var inputs = document.querySelectorAll('#custom_panel_list input[type="checkbox"]');
+            for (var i = 0; i < inputs.length; i++) inputs[i].checked = false;
+            updateCustomCount();
+        }
+
+        // 保存（新建 or 更新）
+        function applyCustomPanel() {
+            var inputs = document.querySelectorAll('#custom_panel_list input[type="checkbox"]');
+            var selected = [];
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].checked) selected.push(inputs[i].value);
+            }
+
+            if (selected.length === 0) {
+                alert('请至少勾选一个勋章！');
+                return;
+            }
+
+            var presets = loadPresets();
+            var idx = editingIndex;
+            var isEdit = (idx >= 0 && idx < presets.length);
+
+            var name = document.getElementById('custom_name').value.trim();
+            var note = document.getElementById('custom_note').value.trim();
+            if (!name) {
+                name = '自定义' + (isEdit ? (idx + 1) : (presets.length + 1));
+            }
+
+            var preset = { name: name, note: note, medals: selected };
+
+            if (isEdit) {
+                presets[idx] = preset;
+                savePresets(presets);
+                renderPresets();
+                closeCustomPanel();
+                showToast('已更新「' + name + '」');
+            } else {
+                presets.push(preset);
+                savePresets(presets);
+                renderPresets();
+                closeCustomPanel();
+                showToast('已保存为「' + name + '」');
+            }
+
+            // 同步到主界面
+            var checkboxes = document.getElementsByName("Checkbox[]");
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = selected.indexOf(checkboxes[i].value) !== -1;
+            }
+            calculate();
+        }
+
+        function showToast(msg) {
+            var t = document.createElement('div');
+            t.textContent = msg;
+            t.style.cssText = 'position:fixed;left:50%;top:30px;transform:translateX(-50%);' +
+                'background:rgba(0,0,0,0.8);color:#fff;padding:8px 16px;border-radius:8px;' +
+                'font-size:14px;z-index:10000;pointer-events:none;transition:opacity 0.3s;';
+            document.body.appendChild(t);
+            setTimeout(function() {
+                t.style.opacity = '0';
+                setTimeout(function() { document.body.removeChild(t); }, 300);
+            }, 1200);
+        }
+
+        // 点击遮罩空白处关闭
+        document.addEventListener('click', function(e) {
+            var panel = document.getElementById('custom_panel');
+            if (e.target === panel) closeCustomPanel();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeCustomPanel();
+        });
+
+        document.getElementById('custom_name').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                applyCustomPanel();
+            }
+        });
+        document.getElementById('custom_note').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                applyCustomPanel();
+            }
+        });
+
         // ----- 初始化 -----
         calculate();
+        renderPresets();
 
-        // 从 URL 获取 uid 并填充
         function getQueryParam(param) {
             var urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
@@ -610,7 +1264,6 @@
             document.getElementById('zs_uid').value = uid;
         }
 
-        // 按 Enter 键快速触发赠送
         document.getElementById('zs_uid').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 send();
