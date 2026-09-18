@@ -645,7 +645,7 @@
                 <div class="qs_note">
                     <span class="note-item"><span class="dot dot-full"></span> 全套：不含糖果盒、遗忘水、杀意人偶</span>
                     <span class="note-item"><span class="dot dot-corrupt"></span> 堕落套：咆哮 + 肥皂 + 变骚 + 千杯</span>
-                    <span class="note-item"><span class="dot dot-purify"></span> 净化套：茉香啤酒</span>
+                    <span class="note-item"><span class="dot dot-purify"></span> 净化套：不含飘飘、糖果盒、遗忘水、杀意人偶、咆哮、肥皂、变骚、千杯</span>
                     <span class="note-item"><span class="dot dot-custom"></span> 自定义：可命名 + 备注，保存在本地浏览器</span>
                     <span class="note-item"><span class="dot dot-clear"></span> 清空：取消所有勾选</span>
                 </div>
@@ -903,12 +903,10 @@
 
         function selectPurifySet() {
             var checkboxes = document.getElementsByName("Checkbox[]");
-            var select = ['456'];
+            // 排除：飘飘、糖果盒、遗忘水、杀意人偶、咆哮、肥皂、变骚、千杯
+            var exclude = ['840', '455', '104', '600', '100', '20', '174', '45'];
             for (var i = 0; i < checkboxes.length; i++) {
-                checkboxes[i].checked = false;
-                if (select.indexOf(checkboxes[i].value) !== -1) {
-                    checkboxes[i].checked = true;
-                }
+                checkboxes[i].checked = (exclude.indexOf(checkboxes[i].value) === -1);
             }
             calculate();
         }
