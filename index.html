@@ -50,6 +50,13 @@
             margin-bottom: 4px;
         }
 
+        .uid_input_row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         input[type="text"] {
             height: 30px;
             border-radius: 6px;
@@ -57,6 +64,24 @@
             padding: 0 10px;
             font-size: 16px;
             width: 200px;
+        }
+
+        .history_btn {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .history_btn:hover {
+            background: #f0f0f0;
         }
 
         .container {
@@ -106,7 +131,6 @@
             word-break: break-word;
         }
 
-        /* ----- 快速选择区域 ----- */
         .quick_select {
             margin-top: 14px;
             padding: 12px 14px;
@@ -171,47 +195,17 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .quick_btn.btn-full {
-            background: #e3f0ff;
-            color: #1a5a9c;
-        }
-        .quick_btn.btn-full:hover {
-            background: #c5dfff;
-        }
+        .quick_btn.btn-full { background: #e3f0ff; color: #1a5a9c; }
+        .quick_btn.btn-full:hover { background: #c5dfff; }
+        .quick_btn.btn-corrupt { background: #ffe3e3; color: #b13b3b; }
+        .quick_btn.btn-corrupt:hover { background: #ffd0d0; }
+        .quick_btn.btn-purify { background: #e6f7e6; color: #2a7a2a; }
+        .quick_btn.btn-purify:hover { background: #c8f0c8; }
+        .quick_btn.btn-custom { background: #fff3d6; color: #a66a00; }
+        .quick_btn.btn-custom:hover { background: #ffe8b3; }
+        .quick_btn.btn-clear { background: #f0f0f0; color: #555; }
+        .quick_btn.btn-clear:hover { background: #e0e0e0; }
 
-        .quick_btn.btn-corrupt {
-            background: #ffe3e3;
-            color: #b13b3b;
-        }
-        .quick_btn.btn-corrupt:hover {
-            background: #ffd0d0;
-        }
-
-        .quick_btn.btn-purify {
-            background: #e6f7e6;
-            color: #2a7a2a;
-        }
-        .quick_btn.btn-purify:hover {
-            background: #c8f0c8;
-        }
-
-        .quick_btn.btn-custom {
-            background: #fff3d6;
-            color: #a66a00;
-        }
-        .quick_btn.btn-custom:hover {
-            background: #ffe8b3;
-        }
-
-        .quick_btn.btn-clear {
-            background: #f0f0f0;
-            color: #555;
-        }
-        .quick_btn.btn-clear:hover {
-            background: #e0e0e0;
-        }
-
-        /* ----- 自定义预设按钮行 ----- */
         .preset_row {
             display: none;
             flex-wrap: wrap;
@@ -274,10 +268,8 @@
 
         .preset_del {
             position: absolute;
-            top: -6px;
-            right: -6px;
-            width: 16px;
-            height: 16px;
+            top: -6px; right: -6px;
+            width: 16px; height: 16px;
             border-radius: 50%;
             background: #ff6b6b;
             color: #fff;
@@ -291,16 +283,12 @@
             font-weight: bold;
             user-select: none;
         }
-        .preset_del:hover {
-            background: #ff3838;
-        }
+        .preset_del:hover { background: #ff3838; }
 
         .preset_edit {
             position: absolute;
-            top: -6px;
-            left: -6px;
-            width: 16px;
-            height: 16px;
+            top: -6px; left: -6px;
+            width: 16px; height: 16px;
             border-radius: 50%;
             background: #5b9bd5;
             color: #fff;
@@ -314,9 +302,7 @@
             font-weight: bold;
             user-select: none;
         }
-        .preset_edit:hover {
-            background: #3d82c0;
-        }
+        .preset_edit:hover { background: #3d82c0; }
 
         .qs_note {
             font-size: 13px;
@@ -343,23 +329,12 @@
             border-radius: 50%;
             margin-right: 2px;
         }
-        .dot-full {
-            background: #1a5a9c;
-        }
-        .dot-corrupt {
-            background: #b13b3b;
-        }
-        .dot-purify {
-            background: #2a7a2a;
-        }
-        .dot-custom {
-            background: #a66a00;
-        }
-        .dot-clear {
-            background: #888;
-        }
+        .dot-full { background: #1a5a9c; }
+        .dot-corrupt { background: #b13b3b; }
+        .dot-purify { background: #2a7a2a; }
+        .dot-custom { background: #a66a00; }
+        .dot-clear { background: #888; }
 
-        /* ----- functions ----- */
         #functions {
             display: flex;
             flex-direction: column;
@@ -405,13 +380,9 @@
             line-height: 1.6;
         }
 
-        .footnote strong {
-            color: #a33;
-        }
+        .footnote strong { color: #a33; }
 
-        p {
-            margin-bottom: 0px;
-        }
+        p { margin-bottom: 0px; }
 
         /* ----- 自定义面板 ----- */
         .custom_panel {
@@ -425,9 +396,7 @@
             padding: 12px;
             box-sizing: border-box;
         }
-        .custom_panel.show {
-            display: flex;
-        }
+        .custom_panel.show { display: flex; }
         .custom_panel_inner {
             background: #fff;
             border-radius: 12px;
@@ -474,7 +443,6 @@
         }
         .custom_panel_toolbar button:hover { background: #eee; }
 
-        /* 面板主体：与主界面相同的两栏结构 */
         .custom_panel_list {
             flex: 1;
             overflow-y: auto;
@@ -485,31 +453,20 @@
             justify-content: space-between;
             gap: 12px;
         }
-        .custom_panel_list .gift-only {
-            width: 55%;
-        }
-        .custom_panel_list .right_part {
-            width: 45%;
-        }
+        .custom_panel_list .gift-only { width: 55%; }
+        .custom_panel_list .right_part { width: 45%; }
         .custom_panel_list .subtitle {
             font-size: 16px;
             font-weight: bold;
             margin: 0 0 8px 0;
         }
-        /* 面板内条目字号略小，避免右侧过窄换行 */
-        .custom_panel_list .options .medal-label {
-            font-size: 12px;
-        }
-        .custom_panel_list .options img {
-            height: 26px;
-            width: 26px;
-        }
+        .custom_panel_list .options .medal-label { font-size: 12px; }
+        .custom_panel_list .options img { height: 26px; width: 26px; }
         .custom_panel_list .options input[type="checkbox"] {
             transform: scale(1.3);
             margin: 0 4px 0 6px;
         }
 
-        /* 名称 / 备注 输入区 */
         .custom_panel_meta {
             padding: 10px 16px;
             border-top: 1px dashed #eee;
@@ -571,61 +528,183 @@
         }
         .custom_confirm:hover { background: #ffa733; }
 
-        /* 响应式微调 */
+        /* ----- 历史记录面板 ----- */
+        .history_panel {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 9998;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+        .history_panel.show { display: flex; }
+        .history_panel_inner {
+            background: #fff;
+            border-radius: 12px;
+            width: 520px;
+            max-width: 100%;
+            max-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+        .history_panel_header {
+            padding: 12px 16px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .history_panel_close {
+            cursor: pointer;
+            font-size: 18px;
+            color: #888;
+            padding: 0 6px;
+            line-height: 1;
+        }
+        .history_panel_close:hover { color: #333; }
+
+        .history_list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        .history_item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.15s;
+        }
+        .history_item:hover { background: #f7f7f7; }
+        .history_item:last-child { border-bottom: none; }
+
+        .history_item .h_uid {
+            font-weight: bold;
+            font-size: 14px;
+            color: #1a5a9c;
+            min-width: 76px;
+            flex-shrink: 0;
+        }
+        .history_item .h_name {
+            flex: 1;
+            margin: 0 10px;
+            font-size: 14px;
+            color: #333;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 0;
+        }
+        .history_item .h_name_empty {
+            color: #bbb;
+            font-style: italic;
+        }
+        .history_item .h_name_edit {
+            flex: 1;
+            margin: 0 10px;
+            height: 26px;
+            border: 1px solid #ffb84d;
+            border-radius: 4px;
+            padding: 0 6px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            box-sizing: border-box;
+            min-width: 0;
+        }
+        .history_item .h_time {
+            font-size: 12px;
+            color: #999;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .history_item .h_open {
+            margin-left: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            flex-shrink: 0;
+            padding: 0 3px;
+            text-decoration: none;
+            opacity: 0.75;
+            transition: opacity 0.15s;
+        }
+        .history_item .h_open:hover { opacity: 1; }
+        .history_item .h_del {
+            margin-left: 6px;
+            color: #ccc;
+            font-size: 16px;
+            cursor: pointer;
+            flex-shrink: 0;
+            padding: 0 4px;
+        }
+        .history_item .h_del:hover { color: #ff6b6b; }
+
+        .history_empty {
+            padding: 30px 16px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+        .history_toolbar {
+            padding: 8px 16px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999;
+        }
+        .history_clear_btn {
+            font-size: 13px;
+            color: #888;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .history_clear_btn:hover {
+            color: #d33;
+            text-decoration: underline;
+        }
+
         @media (max-width: 680px) {
-            body {
-                width: 100%;
-            }
-            #ct {
-                margin: 6px;
-                padding: 12px;
-            }
-            .container {
-                flex-direction: column;
-            }
-            .gift-only,
-            .right_part {
-                width: 100%;
-            }
-            .right_part {
-                margin-top: 16px;
-            }
-            .qs_btn_group {
-                flex-wrap: wrap;
-                gap: 6px;
-            }
-            .quick_btn {
-                font-size: 13px;
-                padding: 5px 10px;
-            }
-            .qs_note {
-                font-size: 12px;
-            }
-            input[type="text"] {
-                width: 100%;
-                box-sizing: border-box;
-            }
-            .custom_panel_list .container {
-                flex-direction: column;
-            }
+            body { width: 100%; }
+            #ct { margin: 6px; padding: 12px; }
+            .container { flex-direction: column; }
+            .gift-only, .right_part { width: 100%; }
+            .right_part { margin-top: 16px; }
+            .qs_btn_group { flex-wrap: wrap; gap: 6px; }
+            .quick_btn { font-size: 13px; padding: 5px 10px; }
+            .qs_note { font-size: 12px; }
+            input[type="text"] { width: 100%; box-sizing: border-box; }
+            .custom_panel_list .container { flex-direction: column; }
             .custom_panel_list .gift-only,
-            .custom_panel_list .right_part {
-                width: 100%;
-            }
+            .custom_panel_list .right_part { width: 100%; }
+            .uid_input_row input[type="text"] { flex: 1; width: auto; min-width: 0; }
         }
     </style>
 </head>
 
 <body>
     <div id="ct">
-        <!-- ===== 顶部：UID ===== -->
         <div class="top_container">
             <div class="uid_input">
                 <p class="subtitle">对方的用户ID: </p>
-                <input type="text" id="zs_uid" value="" placeholder="请输入对方UID" />
+                <div class="uid_input_row">
+                    <input type="text" id="zs_uid" value="" placeholder="请输入对方UID" />
+                    <button type="button" class="history_btn" onclick="openHistoryPanel()">📜 历史记录</button>
+                </div>
             </div>
 
-            <!-- ===== 快速选择区域 ===== -->
             <div class="quick_select">
                 <div class="qs_title">
                     ⚡ 快速选择
@@ -639,7 +718,6 @@
                     <button type="button" class="quick_btn btn-clear" onclick="clearSelection()">🗑️ 清空</button>
                 </div>
 
-                <!-- 自定义预设按钮行（初始隐藏） -->
                 <div class="preset_row" id="preset_row"></div>
 
                 <div class="qs_note">
@@ -652,9 +730,7 @@
             </div>
         </div>
 
-        <!-- ===== 主体：勋章列表 ===== -->
         <div class="container">
-            <!-- 左列：仅赠送 -->
             <div class="gift-only">
                 <p class="subtitle">仅赠送</p>
 
@@ -716,7 +792,7 @@
                 <div class="options"><img src="img/204235k3equy89cv33qy9v.gif" alt="疯狂GM食" />
                     <input type="checkbox" name='Checkbox[]' value='904' gold="50" magic="0" onchange="calculate()" />
                     <span class="medal-label">[金币50] [7日] 疯狂GM食</span>
-                </div>                
+                </div>
 
                 <div class="options"><img src="img/220403i7qb9uk0w9w5180w.gif" alt="糖果盒" />
                     <input type="checkbox" name='Checkbox[]' value='455' gold="70" magic="0" onchange="calculate()" />
@@ -744,7 +820,6 @@
                 </div>
             </div>
 
-            <!-- 右列：可自购 -->
             <div class="right_part">
                 <div class="self-purchase">
                     <p class="subtitle">可自购</p>
@@ -785,7 +860,6 @@
                     </div>
                 </div>
 
-                <!-- ===== 底部：总消耗 + 赠送按钮 ===== -->
                 <div id="functions">
                     <div id="total_cost">总消耗：金币 = 0 咒术 = 0</div>
                     <button type="button" id="send_btn" onclick="send()">
@@ -795,7 +869,6 @@
             </div>
         </div>
 
-        <!-- ===== 底部提示 ===== -->
         <div class="footnote">
             <strong>⚠️ 请注意：</strong>在点击赠送后，如果只出现了你勾选的第一个勋章，说明其他窗口可能被你的浏览器拦截了，
             返回这个页面，在浏览器地址栏的右边，取消对弹出窗口的拦截哦~
@@ -809,16 +882,11 @@
                 <span id="custom_panel_title">⭐ 新建自定义套装</span>
                 <span class="custom_panel_close" onclick="closeCustomPanel()">✕</span>
             </div>
-
             <div class="custom_panel_toolbar">
                 <button type="button" onclick="customSelectAll()">全选</button>
                 <button type="button" onclick="customClearAll()">清空</button>
             </div>
-
-            <!-- 面板主体：按“仅赠送 / 可自购”分组，结构与主界面一致 -->
             <div class="custom_panel_list" id="custom_panel_list"></div>
-
-            <!-- 名称 + 备注 -->
             <div class="custom_panel_meta">
                 <div class="custom_meta_row">
                     <label for="custom_name">套装名称</label>
@@ -829,7 +897,6 @@
                     <input type="text" id="custom_note" maxlength="40" placeholder="选填，例如：不含糖果盒，省点金币">
                 </div>
             </div>
-
             <div class="custom_panel_footer">
                 <span id="custom_panel_count">已选 0 项</span>
                 <button type="button" class="custom_confirm" id="custom_confirm_btn" onclick="applyCustomPanel()">✔ 保存为新预设</button>
@@ -837,7 +904,21 @@
         </div>
     </div>
 
-    <!-- ============================================================ -->
+    <!-- ===== 历史记录面板 ===== -->
+    <div id="history_panel" class="history_panel">
+        <div class="history_panel_inner">
+            <div class="history_panel_header">
+                <span>📜 历史赠送记录</span>
+                <span class="history_panel_close" onclick="closeHistoryPanel()">✕</span>
+            </div>
+            <div class="history_list" id="history_list"></div>
+            <div class="history_toolbar">
+                <span>单击记录填入 UID · 双击名字可编辑 · 🔗 打开空间页</span>
+                <button type="button" class="history_clear_btn" onclick="clearHistory()">清空全部</button>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         // ----- 计算总消耗 -----
         function calculate() {
@@ -853,43 +934,243 @@
             document.getElementById("total_cost").innerHTML = "总消耗：金币 = " + totalGold + " 咒术 = " + totalMagic;
         }
 
+        // ===== 历史记录 =====
+        var HISTORY_KEY = 'discuz_gift_history_v1';
+        var HISTORY_MAX = 50;
+
+        function loadHistory() {
+            try {
+                return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveHistory(history) {
+            try {
+                localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+            } catch (e) {}
+        }
+
+        function recordHistory(uid, name) {
+            uid = String(uid).trim();
+            if (!uid) return;
+            var history = loadHistory();
+            history = history.filter(function(item) { return item.uid !== uid; });
+            history.unshift({
+                uid: uid,
+                name: name || '',
+                time: Date.now()
+            });
+            if (history.length > HISTORY_MAX) {
+                history = history.slice(0, HISTORY_MAX);
+            }
+            saveHistory(history);
+        }
+
+        function renderHistoryList() {
+            var listEl = document.getElementById('history_list');
+            var history = loadHistory();
+            listEl.innerHTML = '';
+
+            if (history.length === 0) {
+                listEl.innerHTML = '<div class="history_empty">暂无赠送记录</div>';
+                return;
+            }
+
+            history.forEach(function(item, index) {
+                var row = document.createElement('div');
+                row.className = 'history_item';
+
+                var uidEl = document.createElement('span');
+                uidEl.className = 'h_uid';
+                uidEl.textContent = 'UID: ' + item.uid;
+                row.appendChild(uidEl);
+
+                var nameEl = document.createElement('span');
+                nameEl.className = 'h_name';
+                if (item.name) {
+                    nameEl.textContent = item.name;
+                } else {
+                    nameEl.textContent = '（双击编辑名字）';
+                    nameEl.classList.add('h_name_empty');
+                }
+                nameEl.title = '双击编辑用户名';
+                nameEl.ondblclick = (function(idx, el) {
+                    return function(e) {
+                        e.stopPropagation();
+                        startEditHistoryName(idx, el);
+                    };
+                })(index, nameEl);
+                row.appendChild(nameEl);
+
+                var timeEl = document.createElement('span');
+                timeEl.className = 'h_time';
+                timeEl.textContent = formatTime(item.time);
+                row.appendChild(timeEl);
+
+                var openEl = document.createElement('span');
+                openEl.className = 'h_open';
+                openEl.textContent = '🔗';
+                openEl.title = '打开对方空间页（查看用户名后双击名字编辑）';
+                openEl.onclick = (function(uid) {
+                    return function(e) {
+                        e.stopPropagation();
+                        window.open('https://www.gamemale.com/space-uid-' + uid + '.html', '_blank');
+                    };
+                })(item.uid);
+                row.appendChild(openEl);
+
+                var delEl = document.createElement('span');
+                delEl.className = 'h_del';
+                delEl.textContent = '×';
+                delEl.title = '删除此记录';
+                delEl.onclick = (function(idx) {
+                    return function(e) {
+                        e.stopPropagation();
+                        deleteHistoryItem(idx);
+                    };
+                })(index);
+                row.appendChild(delEl);
+
+                // 单击行填入 UID（排除名字区、按钮和输入框）
+                row.onclick = (function(uid) {
+                    return function(e) {
+                        var t = e.target;
+                        if (t.tagName === 'INPUT') return;
+                        if (t.classList.contains('h_name') ||
+                            t.classList.contains('h_open') ||
+                            t.classList.contains('h_del')) return;
+                        document.getElementById('zs_uid').value = uid;
+                        closeHistoryPanel();
+                        showToast('已填入 UID: ' + uid);
+                    };
+                })(item.uid);
+
+                listEl.appendChild(row);
+            });
+        }
+
+        function startEditHistoryName(index, nameEl) {
+            var history = loadHistory();
+            if (index < 0 || index >= history.length) return;
+            var current = history[index].name || '';
+
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'h_name_edit';
+            input.value = current;
+            input.maxLength = 30;
+            input.placeholder = '输入用户名';
+
+            var finished = false;
+            function finish(save) {
+                if (finished) return;
+                finished = true;
+                if (save) {
+                    var val = input.value.trim();
+                    var h = loadHistory();
+                    if (index >= 0 && index < h.length) {
+                        h[index].name = val;
+                        saveHistory(h);
+                    }
+                }
+                renderHistoryList();
+            }
+
+            input.onkeydown = function(e) {
+                if (e.key === 'Enter') { e.preventDefault(); finish(true); }
+                else if (e.key === 'Escape') { e.preventDefault(); finish(false); }
+            };
+            input.onblur = function() { finish(true); };
+
+            nameEl.replaceWith(input);
+            input.focus();
+            input.select();
+        }
+
+        function formatTime(ts) {
+            if (!ts) return '';
+            var d = new Date(ts);
+            var now = new Date();
+            var diff = now - d;
+            if (diff < 60000) return '刚刚';
+            if (diff < 3600000) return Math.floor(diff / 60000) + ' 分钟前';
+            if (diff < 86400000) return Math.floor(diff / 3600000) + ' 小时前';
+            var M = d.getMonth() + 1;
+            var D = d.getDate();
+            var h = d.getHours();
+            var m = d.getMinutes();
+            return M + '/' + D + ' ' + h + ':' + (m < 10 ? '0' : '') + m;
+        }
+
+        function openHistoryPanel() {
+            renderHistoryList();
+            document.getElementById('history_panel').classList.add('show');
+        }
+
+        function closeHistoryPanel() {
+            document.getElementById('history_panel').classList.remove('show');
+        }
+
+        function deleteHistoryItem(index) {
+            var history = loadHistory();
+            if (index < 0 || index >= history.length) return;
+            history.splice(index, 1);
+            saveHistory(history);
+            renderHistoryList();
+        }
+
+        function clearHistory() {
+            if (!confirm('确定要清空全部历史赠送记录吗？')) return;
+            saveHistory([]);
+            renderHistoryList();
+            showToast('已清空历史记录');
+        }
+
         // ----- 发送 -----
         function send() {
             var url = "https://www.gamemale.com/plugin.php?id=wodexunzhang:showxunzhang&action=zengsongAction&medalid=";
-            var uid = document.getElementById("zs_uid").value;
-            if (!uid || uid.trim() === "") {
+            var uid = document.getElementById("zs_uid").value.trim();
+            if (!uid) {
                 alert("请先输入对方的用户ID！");
                 return;
             }
             var str = document.getElementsByName("Checkbox[]");
+            var checkedCount = 0;
+            for (var z = 0; z < str.length; z++) {
+                if (str[z].checked) checkedCount++;
+            }
+            if (checkedCount === 0) {
+                alert("请至少勾选一个勋章！");
+                return;
+            }
+
+            // 记录历史（保留之前编辑过的名字）
+            var existing = loadHistory().find(function(item) { return item.uid === uid; });
+            recordHistory(uid, existing ? existing.name : '');
+
             var delay = 0;
             var interval = 500;
-
             for (var z = 0; z < str.length; z++) {
                 if (str[z].checked) {
-                    (function(medalId, uid) {
+                    (function(medalId, targetUid) {
                         setTimeout(function() {
-                            var sum = url + medalId + "&zs_uid=" + uid + "&checkUID=" + uid;
+                            var sum = url + medalId + "&zs_uid=" + targetUid + "&checkUID=" + targetUid;
                             window.open(sum);
                         }, delay);
                     })(str[z].value, uid);
                     delay += interval;
                 }
             }
-            if (delay === 0) {
-                alert("请至少勾选一个勋章！");
-            }
         }
 
-        // ===== 快速选择函数 =====
+        // ===== 快速选择 =====
         function selectFullSet() {
             var checkboxes = document.getElementsByName("Checkbox[]");
             var exclude = ['455', '104', '600'];
             for (var i = 0; i < checkboxes.length; i++) {
-                checkboxes[i].checked = true;
-                if (exclude.indexOf(checkboxes[i].value) !== -1) {
-                    checkboxes[i].checked = false;
-                }
+                checkboxes[i].checked = exclude.indexOf(checkboxes[i].value) === -1;
             }
             calculate();
         }
@@ -898,20 +1179,16 @@
             var checkboxes = document.getElementsByName("Checkbox[]");
             var select = ['100', '20', '174', '45'];
             for (var i = 0; i < checkboxes.length; i++) {
-                checkboxes[i].checked = false;
-                if (select.indexOf(checkboxes[i].value) !== -1) {
-                    checkboxes[i].checked = true;
-                }
+                checkboxes[i].checked = select.indexOf(checkboxes[i].value) !== -1;
             }
             calculate();
         }
 
         function selectPurifySet() {
             var checkboxes = document.getElementsByName("Checkbox[]");
-            // 排除：飘飘、糖果盒、遗忘水、杀意人偶、咆哮、肥皂、变骚、千杯
             var exclude = ['840', '455', '104', '600', '100', '20', '174', '45'];
             for (var i = 0; i < checkboxes.length; i++) {
-                checkboxes[i].checked = (exclude.indexOf(checkboxes[i].value) === -1);
+                checkboxes[i].checked = exclude.indexOf(checkboxes[i].value) === -1;
             }
             calculate();
         }
@@ -925,7 +1202,6 @@
         }
 
         // ===== 自定义预设 =====
-        // 存储结构：[ { name, note, medals: ["100","20"] }, ... ]
         var PRESET_KEY = 'discuz_custom_presets_v2';
         var editingIndex = -1;
 
@@ -953,7 +1229,6 @@
             } catch (e) {}
         }
 
-        // 渲染预设按钮行
         function renderPresets() {
             var row = document.getElementById('preset_row');
             var presets = loadPresets();
@@ -1045,7 +1320,6 @@
         }
 
         // ===== 自定义面板 =====
-        // 与主界面完全一致的结构：仅赠送 / 可自购 两栏
         function openCustomPanel(editIdx) {
             editingIndex = (typeof editIdx === 'number' && editIdx >= 0) ? editIdx : -1;
 
@@ -1060,11 +1334,9 @@
             document.getElementById('custom_name').value = editing ? (editing.name || '') : '';
             document.getElementById('custom_note').value = editing ? (editing.note || '') : '';
 
-            // 清除旧内容
             var list = document.getElementById('custom_panel_list');
             list.innerHTML = '';
 
-            // 在面板内部，用与主界面相同的 .container / .gift-only / .right_part / .options
             var panelContainer = document.createElement('div');
             panelContainer.className = 'container';
 
@@ -1085,7 +1357,6 @@
             rightInner.appendChild(rightTitle);
             rightCol.appendChild(rightInner);
 
-            // 获取主界面的两个分组，按原顺序复制条目
             var giftOnlySource = document.querySelector('#ct .gift-only');
             var selfPurchaseSource = document.querySelector('#ct .self-purchase');
 
@@ -1117,7 +1388,6 @@
                 return item;
             }
 
-            // 左栏：仅赠送
             var leftCbs = giftOnlySource.querySelectorAll('input[name="Checkbox[]"]');
             for (var i = 0; i < leftCbs.length; i++) {
                 var cb = leftCbs[i];
@@ -1125,7 +1395,6 @@
                 leftCol.appendChild(buildPanelItem(cb, isChecked));
             }
 
-            // 右栏：可自购
             var rightCbs = selfPurchaseSource.querySelectorAll('input[name="Checkbox[]"]');
             for (var j = 0; j < rightCbs.length; j++) {
                 var rcb = rightCbs[j];
@@ -1171,7 +1440,6 @@
             updateCustomCount();
         }
 
-        // 保存（新建 or 更新）
         function applyCustomPanel() {
             var inputs = document.querySelectorAll('#custom_panel_list input[type="checkbox"]');
             var selected = [];
@@ -1210,7 +1478,6 @@
                 showToast('已保存为「' + name + '」');
             }
 
-            // 同步到主界面
             var checkboxes = document.getElementsByName("Checkbox[]");
             for (var i = 0; i < checkboxes.length; i++) {
                 checkboxes[i].checked = selected.indexOf(checkboxes[i].value) !== -1;
@@ -1231,14 +1498,19 @@
             }, 1200);
         }
 
-        // 点击遮罩空白处关闭
+        // 遮罩关闭
         document.addEventListener('click', function(e) {
             var panel = document.getElementById('custom_panel');
             if (e.target === panel) closeCustomPanel();
+            var hPanel = document.getElementById('history_panel');
+            if (e.target === hPanel) closeHistoryPanel();
         });
 
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeCustomPanel();
+            if (e.key === 'Escape') {
+                closeCustomPanel();
+                closeHistoryPanel();
+            }
         });
 
         document.getElementById('custom_name').addEventListener('keydown', function(e) {
