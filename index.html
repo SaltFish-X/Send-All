@@ -544,7 +544,7 @@
         .history_panel_inner {
             background: #fff;
             border-radius: 12px;
-            width: 520px;
+            width: 540px;
             max-width: 100%;
             max-height: 70vh;
             display: flex;
@@ -587,6 +587,13 @@
         .history_item:hover { background: #f7f7f7; }
         .history_item:last-child { border-bottom: none; }
 
+        .history_item.pinned {
+            background: #fffbf0;
+        }
+        .history_item.pinned:hover {
+            background: #fff5e0;
+        }
+
         .history_item .h_uid {
             font-weight: bold;
             font-size: 14px;
@@ -627,8 +634,25 @@
             white-space: nowrap;
             flex-shrink: 0;
         }
-        .history_item .h_open {
+        .history_item .h_pin {
             margin-left: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            flex-shrink: 0;
+            padding: 0 3px;
+            opacity: 0.3;
+            transition: opacity 0.15s, transform 0.15s;
+            user-select: none;
+        }
+        .history_item .h_pin:hover {
+            opacity: 1;
+            transform: scale(1.15);
+        }
+        .history_item .h_pin.pinned {
+            opacity: 1;
+        }
+        .history_item .h_open {
+            margin-left: 6px;
             font-size: 14px;
             cursor: pointer;
             flex-shrink: 0;
@@ -913,7 +937,7 @@
             </div>
             <div class="history_list" id="history_list"></div>
             <div class="history_toolbar">
-                <span>单击记录填入 UID · 双击名字可编辑 · 🔗 打开空间页</span>
+                <span>单击填入 UID · 双击名字编辑 · 📌 置顶 · 🔗 打开空间页</span>
                 <button type="button" class="history_clear_btn" onclick="clearHistory()">清空全部</button>
             </div>
         </div>
@@ -936,7 +960,7 @@
 
         // ===== 历史记录 =====
         var HISTORY_KEY = 'discuz_gift_history_v1';
-        var HISTORY_MAX = 50;
+        var HISTORY_MAX = 20;
 
         function loadHistory() {
             try {
@@ -952,25 +976,69 @@
             } catch (e) {}
         }
 
+        // 记录一次赠送：已存在则更新 time/name，保留 pinned；不存在则 push
         function recordHistory(uid, name) {
             uid = String(uid).trim();
             if (!uid) return;
             var history = loadHistory();
-            history = history.filter(function(item) { return item.uid !== uid; });
-            history.unshift({
-                uid: uid,
-                name: name || '',
-                time: Date.now()
-            });
-            if (history.length > HISTORY_MAX) {
-                history = history.slice(0, HISTORY_MAX);
+            var found = false;
+            for (var i = 0; i < history.length; i++) {
+                if (history[i].uid === uid) {
+                    history[i].time = Date.now();
+                    if (name) history[i].name = name;
+                    if (typeof history[i].pinned !== 'boolean') history[i].pinned = false;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                history.push({
+                    uid: uid,
+                    name: name || '',
+                    time: Date.now(),
+                    pinned: false
+                });
+            }
+            // 超出上限时，优先删除“未置顶且最旧”的记录
+            while (history.length > HISTORY_MAX) {
+                var removeIdx = -1;
+                for (var j = history.length - 1; j >= 0; j--) {
+                    if (!history[j].pinned) { removeIdx = j; break; }
+                }
+                if (removeIdx === -1) removeIdx = history.length - 1;
+                history.splice(removeIdx, 1);
             }
             saveHistory(history);
         }
 
+        // 排序：置顶优先，同组内按时间倒序
+        function getSortedHistory() {
+            var history = loadHistory();
+            history.forEach(function(item) {
+                if (typeof item.pinned !== 'boolean') item.pinned = false;
+            });
+            history.sort(function(a, b) {
+                var pa = !!a.pinned, pb = !!b.pinned;
+                if (pa !== pb) return pa ? -1 : 1;
+                return (b.time || 0) - (a.time || 0);
+            });
+            return history;
+        }
+
+        function togglePin(index) {
+            var history = getSortedHistory();
+            if (index < 0 || index >= history.length) return;
+            history[index].pinned = !history[index].pinned;
+            saveHistory(history);
+            renderHistoryList();
+            showToast(history[index].pinned
+                ? '已置顶 UID: ' + history[index].uid
+                : '已取消置顶');
+        }
+
         function renderHistoryList() {
             var listEl = document.getElementById('history_list');
-            var history = loadHistory();
+            var history = getSortedHistory();
             listEl.innerHTML = '';
 
             if (history.length === 0) {
@@ -981,6 +1049,7 @@
             history.forEach(function(item, index) {
                 var row = document.createElement('div');
                 row.className = 'history_item';
+                if (item.pinned) row.classList.add('pinned');
 
                 var uidEl = document.createElement('span');
                 uidEl.className = 'h_uid';
@@ -1009,6 +1078,19 @@
                 timeEl.textContent = formatTime(item.time);
                 row.appendChild(timeEl);
 
+                // 📌 置顶按钮
+                var pinEl = document.createElement('span');
+                pinEl.className = 'h_pin' + (item.pinned ? ' pinned' : '');
+                pinEl.textContent = '📌';
+                pinEl.title = item.pinned ? '取消置顶' : '置顶此记录';
+                pinEl.onclick = (function(idx) {
+                    return function(e) {
+                        e.stopPropagation();
+                        togglePin(idx);
+                    };
+                })(index);
+                row.appendChild(pinEl);
+
                 var openEl = document.createElement('span');
                 openEl.className = 'h_open';
                 openEl.textContent = '🔗';
@@ -1033,14 +1115,14 @@
                 })(index);
                 row.appendChild(delEl);
 
-                // 单击行填入 UID（排除名字区、按钮和输入框）
                 row.onclick = (function(uid) {
                     return function(e) {
                         var t = e.target;
                         if (t.tagName === 'INPUT') return;
                         if (t.classList.contains('h_name') ||
                             t.classList.contains('h_open') ||
-                            t.classList.contains('h_del')) return;
+                            t.classList.contains('h_del') ||
+                            t.classList.contains('h_pin')) return;
                         document.getElementById('zs_uid').value = uid;
                         closeHistoryPanel();
                         showToast('已填入 UID: ' + uid);
@@ -1052,7 +1134,7 @@
         }
 
         function startEditHistoryName(index, nameEl) {
-            var history = loadHistory();
+            var history = getSortedHistory();
             if (index < 0 || index >= history.length) return;
             var current = history[index].name || '';
 
@@ -1069,7 +1151,7 @@
                 finished = true;
                 if (save) {
                     var val = input.value.trim();
-                    var h = loadHistory();
+                    var h = getSortedHistory();
                     if (index >= 0 && index < h.length) {
                         h[index].name = val;
                         saveHistory(h);
@@ -1114,7 +1196,7 @@
         }
 
         function deleteHistoryItem(index) {
-            var history = loadHistory();
+            var history = getSortedHistory();
             if (index < 0 || index >= history.length) return;
             history.splice(index, 1);
             saveHistory(history);
@@ -1146,7 +1228,7 @@
                 return;
             }
 
-            // 记录历史（保留之前编辑过的名字）
+            // 记录历史（保留之前编辑过的名字与置顶状态）
             var existing = loadHistory().find(function(item) { return item.uid === uid; });
             recordHistory(uid, existing ? existing.name : '');
 
